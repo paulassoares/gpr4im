@@ -28,3 +28,7 @@ See Section 3 of https://arxiv.org/pdf/2002.05626.pdf for similar process for pr
 >These maps were run with the Queen Mary’s
 Apocrita HPC facility, supported by QMUL Research-IT
 http://doi.org/10.5281/zenodo.438045 using Python 3.6.5.
+
+## Access data here:
+
+> https://www.dropbox.com/sh/mj04kxc30n6npm8/AAA4Ijt190in_QyrWWvD3xs7a?dl=0
