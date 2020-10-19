@@ -1,5 +1,6 @@
 import numpy as np
 import scipy.stats as stats
+import re
 
 
 '''
@@ -71,3 +72,12 @@ def get_kernel_samples(kernel_name, X, n_samples, l=False):
     # Generate n separate samples paths from a Gaussian with mean mu and covariance C:
     Z = np.random.multivariate_normal(mu,C,n_samples)
     return Z, C
+
+
+def get_equation(kern):
+    """
+    Retrieves the LaTeX format functional form of covariance kernel (kern). Taken from:
+    https://gist.github.com/rikrd/05f5ca0c31adb9203823
+    """
+    match = re.search(r'(math::)(\r\n|\r|\n)*(?P<equation>.*)(\r\n|\r|\n)*', kern.__doc__)
+    return '' if match is None else match.group('equation').strip()
