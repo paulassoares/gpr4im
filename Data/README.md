@@ -22,11 +22,14 @@ Investigating Gaussian Process Regression on 21cm foregrounds for low-z, single-
  - `dT_FGwpol_Stripe82_smoothed.npy` (FG emission only (with polarisation) from Stripe 82 region, smoothed by 15m beam)
  - `dT_HI+noise+FGnopol_Stripe82_15mBeam_unsmoothednoise.npy` (FG emission + HI (both smoothed) + noise (unsmoothed))
  - `dT_noise.npy` (instrumental noise, not smoothed by beam)
+ 
  [all temps are in mK]
+ 
+ See Section 3 of https://arxiv.org/pdf/2002.05626.pdf for similar process for producing the above data
+ 
  - `obs_units_lc_faintgals_new_lownu40.36_dnu0.50.fits` (21cmFAST data)
  - `cov_matrix_eor_120-145.npy` (ps_eor covariance matrix)
 
-See Section 3 of https://arxiv.org/pdf/2002.05626.pdf for similar process for producing the above data
 
 ## MultiDark Data:
 
