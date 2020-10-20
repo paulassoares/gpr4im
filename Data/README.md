@@ -14,12 +14,22 @@ Investigating Gaussian Process Regression on 21cm foregrounds for low-z, single-
  - N_dishes = 64, Tsys = 25 K
 
 ## Data Folder currently contains:
- - `dT_HI+noise_15mBeam.npy` (HI+noise only [no FGs])
- - `dT_HI+noise+FGnopol_Stripe82_15mBeam.npy` (as above with FG emission from Stripe82 region)
- - `dT_HI+noise+FGwpol_Stripe82_15mBeam.npy` (as above with effects from polarization leakage applied to FG)
-[all temps are in mK]
+ - `dT_HI.npy` (HI only, not smoothed by telescope beam)
+ - `dT_HI_smoothed.npy` (HI only, smoothed by 15m beam)
+ - `dT_FGnopol_Stripe82.npy` (FG emission only (no polarisation) from Stripe 82 region, not smoothed by beam)
+ - `dT_FGnopol_Stripe82_smoothed.npy` (FG emission only (no polarisation) from Stripe 82 region, smoothed by 15m beam)
+ - `dT_FGwpol_Stripe82.npy` (FG emission only (with polarisation) from Stripe 82 region, not smoothed by beam)
+ - `dT_FGwpol_Stripe82_smoothed.npy` (FG emission only (with polarisation) from Stripe 82 region, smoothed by 15m beam)
+ - `dT_HI+noise+FGnopol_Stripe82_15mBeam_unsmoothednoise.npy` (FG emission + HI (both smoothed) + noise (unsmoothed))
+ - `dT_noise.npy` (instrumental noise, not smoothed by beam)
+ 
+ [all temps are in mK]
+ 
+ See Section 3 of https://arxiv.org/pdf/2002.05626.pdf for similar process for producing the above data
+ 
+ - `obs_units_lc_faintgals_new_lownu40.36_dnu0.50.fits` (21cmFAST data)
+ - `cov_matrix_eor_120-145.npy` (ps_eor covariance matrix)
 
-See Section 3 of https://arxiv.org/pdf/2002.05626.pdf for similar process for producing the above data
 
 ## MultiDark Data:
 
@@ -28,3 +38,7 @@ See Section 3 of https://arxiv.org/pdf/2002.05626.pdf for similar process for pr
 >These maps were run with the Queen Mary’s
 Apocrita HPC facility, supported by QMUL Research-IT
 http://doi.org/10.5281/zenodo.438045 using Python 3.6.5.
+
+## Access data here:
+
+> https://www.dropbox.com/sh/9zftczeypu7xgt3/AABiiBw_0SBPrLgSHsjiISz8a?dl=0
