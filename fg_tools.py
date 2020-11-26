@@ -30,7 +30,7 @@ def GPRclean(Input, freqs, k_FG, k_21cm, prior_FG=None, prior_21cm=None, num_res
     axes = np.shape(Input)
     
     # if desired, do a pre-PCA with N_FG=NprePCA removed components
-    if NprePCA > 0: Input = fg.PCAclean(Input, N_FG=NprePCA)[0]
+    if NprePCA > 0: Input = PCAclean(Input, N_FG=NprePCA)[0]
     Input = load.LoSpixels(Input) # converting [Nx,Ny,Nz] -> [Npix,Nz]
     if invert==True: Input = Input[::-1] # invert frequency axis
     
