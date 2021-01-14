@@ -1,6 +1,6 @@
 import numpy as np
 
-from ps_eor import psutil, datacube, pspec
+#from ps_eor import psutil, datacube, pspec
 
 
 '''
@@ -92,5 +92,5 @@ def LoSpixels(image_cube, mean_center=True):
         nz = np.shape(image_LoSpixels)[0]
         for i in range(nz):
             image_LoSpixels[i] = image_LoSpixels[i] - np.mean(image_LoSpixels[i])
-
+    
     return image_LoSpixels

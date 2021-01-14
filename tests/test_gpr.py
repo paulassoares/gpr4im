@@ -26,7 +26,7 @@ def test_gpr_run():
     kern_fg, kern_21cm = GPy.kern.Poly(1, order=4), GPy.kern.Exponential(1)
     # run GPR and obtain residuals
     gpr_res, gpr_cov, model = fg.GPRclean(FGnopol_data, freqs, kern_fg, kern_21cm,
-                                      NprePCA=0, invert=True, heteroscedastic=True)
+                                      NprePCA=0, noise_data=None, invert=True, zero_noise=False, heteroscedastic=True)
     
     #### Calculating power spectrum ####
     

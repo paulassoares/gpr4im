@@ -45,7 +45,7 @@ def binned_covariance(data, dx, vis=False):
     return bins, binned_cov
 
 
-def get_kernel_samples(kernel_name, X, n_samples, l=False):
+def get_kernel_samples(kernel_name, X, n_samples, l=False, var=1.0):
     """
     Generate the multivariate random distribution of data with zero mean and covariance kernel
     specified by kernel_name, and obtain n samples.
@@ -60,8 +60,8 @@ def get_kernel_samples(kernel_name, X, n_samples, l=False):
     import GPy
     # Get the kernel from GPy:
     Kernel = getattr(GPy.kern, kernel_name)
-    if l==False: k = Kernel(input_dim=1)
-    else: k = Kernel(input_dim=1, lengthscale=l)
+    if l==False: k = Kernel(input_dim=1, variance=var)
+    else: k = Kernel(input_dim=1, lengthscale=l, variance=var)
     
     X = X[:,None] # reshape X to make it n*p, they try to use 'design matrices' in GPy 
     mu = np.zeros((len(X)))# vector of the means, zero

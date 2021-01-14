@@ -11,50 +11,85 @@ This script contains Steve's code for foreground removal using PCA, and our code
 '''
 
 
-def GPRclean(Input, freqs, k_FG, k_21cm, prior_FG=None, prior_21cm=None, num_restarts=10, NprePCA=0, noise=True, heteroscedastic=False, invert=False):
+def GPRclean(Input, freqs, k_FG, k_21cm, num_restarts=10, NprePCA=0, noise_data=None, zero_noise=False, heteroscedastic=False, invert=False):
     '''
     Runs foreground clean on IM data using GPR.
     
     Input: data cube to be cleaned, in [Nx,Ny,Nz] where Nz is the frequency direction
     freqs: array of frequency range of data
     k_FG, k_21cm: choice of foreground and 21cm kernels (can be a sum or product of different kernels)
-    prior_FG, prior_21cm: prior bounds for lengthscale of kernels, should be a list [lower bound, upper bound].
-        If None, no prior will be set for the lengthscale
     num_restarts: how many times to optimise the GPR regression model
     NprePCA: 0 if no pre-PCA is desired, otherwise this number is the N_FG number of components used
         in a pre-PCA clean of the data
-    noise: if False, sets noise in model to zero (and fixed)
+    noise_data: input here your noise map in [Nx,Ny,Nz] if you have a reasonable estimate from your data, 
+        otherwise set to None and use GPR to try to fit your noise
+    zero_noise: if True, the noise in your GPR model will be set to zero and fixed. Otherwise it will try to
+        fit to noise in your data, in either the heteroscedastic or non-heteroscedastic case. Set to zero if 
+        you want to fit your noise with a separate kernel instead, otherwise you will fit to noise twice.
     heteroscedastic: if True, runs Heteroscedastic regression model (variable noise)
+        (Note: you cannot have noise=False and heteroscedastic=True at the same time, for obvious reasons).
     invert: if True, inverts data in the frequency direction
     '''
     axes = np.shape(Input)
     
     # if desired, do a pre-PCA with N_FG=NprePCA removed components
     if NprePCA > 0: Input = PCAclean(Input, N_FG=NprePCA)[0]
-    Input = load.LoSpixels(Input) # converting [Nx,Ny,Nz] -> [Npix,Nz]
-    if invert==True: Input = Input[::-1] # invert frequency axis
     
-    # setting priors:
-    if prior_FG is not None:
-        k_FG.lengthscale.constrain_bounded(prior_FG[0],prior_FG[1])
-    if prior_21cm is not None:
-        k_21cm.lengthscale.constrain_bounded(prior_21cm[0],prior_21cm[1])
+    # converting [Nx,Ny,Nz] -> [Npix,Nz]
+        # note: we mean center the data but not the inidividual noise cube, since we want
+        # to extract the real noise variance in our data.
+    Input = load.LoSpixels(Input, mean_center=True)
+    if noise_data is not None: noise_data = load.LoSpixels(noise_data, mean_center=False)
+    
+    # invert frequency axis
+    if invert==True: 
+        Input = Input[::-1]
+        if noise_data is not None: noise_data = noise_data[::-1]
     
     # build your model, input the freq range, the data, and the kernels
     kern = k_FG + k_21cm
-    if heteroscedastic==True: model = GPy.models.GPHeteroscedasticRegression(freqs[:, np.newaxis], Input, kern)
-    else: model = GPy.models.GPRegression(freqs[:, np.newaxis], Input, kern)
     
-    # if data has no noise, set it to zero (and fixed):
-    if noise==False: 
-        model['.*Gaussian_noise'] = 0.0
-        model['.*noise'].fix()
+    # this heteroscedastic case assumes a Gaussian noise variance that changes with frequency
+    if heteroscedastic==True: 
+        # this case assumes noise is known, sets noise level to your noise_data variances
+            # at different frequencies (since heteroscedastic)
+        if noise_data is not None:
+            model = GPy.models.GPHeteroscedasticRegression(freqs[:, np.newaxis], Input, kern)
+            model.het_Gauss.variance.constrain_fixed(noise_data.var(axis=1)[:, None])
+        # this case assumes noise is not known, model will fit a variance at each frequency
+        else:
+            model = GPy.models.GPHeteroscedasticRegression(freqs[:, np.newaxis], Input, kern)
+        # note: if you want the case of *no noise*, there's no need to use heteroscedastic,
+            # so set heteroscedastic = False and see below
+    
+    # this non-heteroscedastic case assumes constant Gaussian noise variance throughout frequency
+    else: 
+        # this case assumes noise is know, sets the noise variance level to the variance
+            # from the input noise_data
+        if noise_data is not None:
+            model = GPy.models.GPRegression(freqs[:, np.newaxis], Input, kern)
+            model.Gaussian_noise.constrain_fixed(noise_data.var())
+        else:
+            # this case assumes there is no noise in your data
+            if zero_noise == True:
+                model = GPy.models.GPRegression(freqs[:, np.newaxis], Input, kern)
+                model['.*Gaussian_noise'] = 0.0
+                model['.*noise'].fix()
+            # this case assumes there is noise but it is unknown, fits a constant variance
+            else:
+                model = GPy.models.GPRegression(freqs[:, np.newaxis], Input, kern)
     
     # optimise model, find best fitting hyperparameters for kernels
     model.optimize_restarts(num_restarts=num_restarts)
     
-    # extract optimised kernels
-    k_FG, k_21cm = model.kern.parts
+    # extract optimised foreground kernel (depending on how many kernels were considered)
+    if k_FG.name == 'sum':
+        k_FG_len = len(k_FG.parts)
+        k_FG = model.kern.parts[0]
+        if k_FG_len > 1:
+            for i in range(1, k_FG_len):
+                k_FG += model.kern.parts[i]
+    else: k_FG = model.kern.parts[0]
     
     # make prediction of what FGs would look like using this optimised FG kernel
     y_fit, y_cov = model.predict(freqs[:, np.newaxis], full_cov=True, kern=k_FG,
@@ -78,10 +113,10 @@ def PCAclean(Input, N_FG=4):
     
     # Collapse data cube to [Npix,Nz] structure:
     axes = np.shape(Input)
-    Input = load.LoSpixels(Input)
+    Input = load.LoSpixels(Input, mean_center=True)
     Nz,Npix = np.shape(Input)
     
-    # Obtain frequenc covariance matrix for input data
+    # Obtain frequency covariance matrix for input data
     C = np.cov(Input)
     eigenval, eigenvec = np.linalg.eigh(C)
     eignumb = np.linspace(1,len(eigenval),len(eigenval))
