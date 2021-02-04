@@ -33,6 +33,39 @@ def getpkspec(datgrid1,datgrid2,nc,vol,w,W):
     return vol * pkspec / ( nc*np.sum(W**2 * w**2) * Wmean**2 * nc**2 )
 
 
+def PerpParaPk(datgrid,nx,ny,nz,lx,ly,lz,kperpbins,kparabins,w,W):
+    '''
+    Return 2D image of P(k_perp,k_para)
+    '''
+    # Obtain two 3D arrays specifying kperp and kpara values at every point in
+    #    pkspec array
+    print('\nCalculating P(k_perp,k_para)...')
+    pkspec = getpkspec(datgrid,datgrid,nx*ny*nz,lx*ly*lz,w,W)
+    kx = 2*np.pi*np.fft.fftfreq(nx,d=lx/nx)
+    ky = 2*np.pi*np.fft.fftfreq(ny,d=ly/ny)
+    kperp = np.sqrt(kx[:,np.newaxis]**2 + ky[np.newaxis,:]**2)
+    kpara = 2*np.pi*np.fft.fftfreq(nz,d=lz/nz)[:int(nz/2)+1]
+    kperp_arr = np.reshape( np.repeat(kperp,int(nz/2)+1) , (nx,ny,int(nz/2)+1) )
+    kpara_arr = np.tile(kpara,(nx,ny,1))
+    # Identify and remove non-independent modes
+    null1,null2,indep = getkspec(nx,ny,nz,lx,ly,lz)
+    pkspec = pkspec[indep==True]
+    kperp_arr = kperp_arr[indep==True]
+    kpara_arr = kpara_arr[indep==True]
+    # Get indices where kperp and kpara values fall in bins
+    ikbin_perp = np.digitize(kperp_arr,kperpbins)
+    ikbin_para = np.digitize(kpara_arr,kparabins)
+    nkperpbin,nkparabin = len(kperpbins)-1,len(kparabins)-1
+    nmodes,pk2d = np.zeros((nkparabin,nkperpbin),dtype=int),np.zeros((nkparabin,nkperpbin))
+    for i in range(nkperpbin):
+        for j in range(nkparabin):
+            nmodes[j,i] = int(np.sum(np.array([(ikbin_perp==i+1) & (ikbin_para==j+1)])))
+            if (nmodes[j,i] > 0):
+                # Average power spectrum into (kperp,kpara) cells
+                pk2d[j,i] = np.mean(pkspec[(ikbin_perp==i+1) & (ikbin_para==j+1)])
+    return pk2d,nmodes
+
+
 def binpk(pkspec,nx,ny,nz,lx,ly,lz,kbins,FullPk=False,doindep=True):
     '''
     Bin 3D power spectrum in angle-averaged bins.

@@ -98,6 +98,10 @@ def GPRclean(Input, freqs, k_FG, k_21cm, num_restarts=10, NprePCA=0, noise_data=
     # subtract FG fit from data, to obtain HI residuals:
     y_sub = Input - y_fit
     
+    # un-revert frequency axis:
+    if invert==True: 
+        y_sub = y_sub[::-1]
+    
     # reshape residuals
     y_sub = np.swapaxes(y_sub,0,1)
     y_sub = np.reshape(y_sub,(axes[0], axes[1], axes[2]))
