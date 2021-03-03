@@ -14,21 +14,34 @@ This script contains Steve's code for foreground removal using PCA, and our code
 def GPRclean(Input, freqs, k_FG, k_21cm, num_restarts=10, NprePCA=0, noise_data=None, zero_noise=False, heteroscedastic=False, invert=False):
     '''
     Runs foreground clean on IM data using GPR.
+    ---------
+    Arguments
+    ---------
     
-    Input: data cube to be cleaned, in [Nx,Ny,Nz] where Nz is the frequency direction
-    freqs: array of frequency range of data
+    INPUT: data cube to be cleaned, in [Nx,Ny,Nz] where Nz is the frequency direction
+    
+    FREQS: array of frequency range of data
+    
     k_FG, k_21cm: choice of foreground and 21cm kernels (can be a sum or product of different kernels)
-    num_restarts: how many times to optimise the GPR regression model
+    
+    NUM_RESTARTS: how many times to optimise the GPR regression model.
+        [NOTE: If you already know your best fitting kernels (i.e., you're inputting the already
+        optimized k_FG and k_21cm kernels), set num_restarts=0.]
+        
     NprePCA: 0 if no pre-PCA is desired, otherwise this number is the N_FG number of components used
         in a pre-PCA clean of the data
-    noise_data: input here your noise map in [Nx,Ny,Nz] if you have a reasonable estimate from your data, 
+    
+    NOISE_DATA: input here your noise map in [Nx,Ny,Nz] if you have a reasonable estimate from your data, 
         otherwise set to None and use GPR to try to fit your noise
-    zero_noise: if True, the noise in your GPR model will be set to zero and fixed. Otherwise it will try to
+        
+    ZERO_NOISE: if True, the noise in your GPR model will be set to zero and fixed. Otherwise it will try to
         fit to noise in your data, in either the heteroscedastic or non-heteroscedastic case. Set to zero if 
         you want to fit your noise with a separate kernel instead, otherwise you will fit to noise twice.
-    heteroscedastic: if True, runs Heteroscedastic regression model (variable noise)
+        
+    HETEROSCEDASTIC: if True, runs Heteroscedastic regression model (variable noise)
         (Note: you cannot have noise=False and heteroscedastic=True at the same time, for obvious reasons).
-    invert: if True, inverts data in the frequency direction
+        
+    INVERT: if True, inverts data in the frequency direction
     '''
     axes = np.shape(Input)
     
