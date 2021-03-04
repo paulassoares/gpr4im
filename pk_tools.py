@@ -122,32 +122,30 @@ def getpk_noPerp(datgrid,w,W,nx,ny,nz,lx,ly,lz,kbins):
     Return 1D P(k_perp)
     '''
     pkspec = getpkspec(datgrid,datgrid,nx*ny*nz,lx*ly*lz,w,W)
-    kx = 2*np.pi*np.fft.fftfreq(nx,d=lx/nx)
-    ky = 2*np.pi*np.fft.fftfreq(ny,d=ly/ny)
-    kperp = np.sqrt(kx[:,np.newaxis]**2 + ky[np.newaxis,:]**2)
-    kperp_arr = np.reshape( np.repeat(kperp,int(nz/2)+1) , (nx,ny,int(nz/2)+1) )
-    # Identify and remove non-independent modes
+    # get 1D array of available k_para modes
+    kpara = 2*np.pi*np.fft.fftfreq(nz,d=lz/nz)[:int(nz/2)+1]
+    # fill a cube the size of our power spectrum with copies of kpara
+    kpara_arr = np.tile(kpara,(nx,ny,1))
+    # identify and remove non-independent modes
     kspec,muspec,indep = getkspec(nx,ny,nz,lx,ly,lz)
     pkspec = pkspec[indep==True]
-    kperp_arr = kperp_arr[indep==True]
+    kpara_arr = kpara_arr[indep==True]
     kspec = kspec[indep==True]
-    # Get indices where kperp values fall in bins
-    ikbin_perp = np.digitize(kperp_arr,kbins)
-    nkperpbin = len(kbins)-1
-    nmodes1d,pk1d = np.zeros((nkperpbin),dtype=int),np.zeros((nkperpbin))
-    for i in range(nkperpbin):
-        nmodes1d[i] = int(np.sum(np.array([ikbin_perp==i+1])))
-        if (nmodes1d[i] > 0):
-            # Set power spectrum on kperp cells to zero:
-            pkspec[ikbin_perp==i+1] = 0
-    ikbin = np.digitize(kspec,kbins)
+    # get indices where kpara values fall in desired 1D bins
     nkbin = len(kbins)-1
-    nmodes,pk3d = np.zeros(nkbin,dtype=int),np.zeros(nkbin)
-    for ik in range(nkbin):
-        nmodes[ik] = int(np.sum(np.array([ikbin==ik+1])))
-        if (nmodes[ik] > 0): #if nmodes==0 for this k then remains Pk=0
-            pk3d[ik] = np.mean(pkspec[ikbin==ik+1])
-    return pk3d, nmodes
+    ikbin_para = np.digitize(kpara_arr,kbins)
+    nmodes1d,pk1d = np.zeros(nkbin,dtype=int),np.zeros(nkbin)
+    # same but for 3D bins:
+    ikbin = np.digitize(kspec,kbins)
+    nmodes3d,pk3d = np.zeros(nkbin,dtype=int),np.zeros(nkbin)
+    for i in range(nkbin):
+        nmodes1d[i] = int(np.sum(np.array([ikbin_para==i+1])))
+        nmodes3d[i] = int(np.sum(np.array([ikbin==i+1])))
+        if (nmodes1d[i] > 0):
+            # average power spectrum into kpara cells
+            pk1d[i] = np.mean(pkspec[ikbin_para==i+1])
+    pk3d = (pk1d*nmodes1d)/nmodes3d
+    return pk3d, nmodes3d
 
 
 def getpk_2Dto3D(pk2d, nmodes2d, kpara_array, kperp_array, kbins):
