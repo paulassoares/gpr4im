@@ -7,7 +7,7 @@ Investigating Gaussian Process Regression on 21cm foregrounds for low-z, single-
  - Effective Central Redshift (z_eff) = 0.39 [Multi-Dark cosmology sim will be a box evolved to this redshift]
  - Frequency Channels = (899 - 1184)MHz - 1MHz channel width (285 channels)
  - Nx,Ny,Nz (cartesian box size in voxels) = 256, 256, 285
- - Cartesian Box physical size Lx,L,Lz = 1000,1000, 924.78 Mpc/h
+ - Cartesian Box physical size Lx,Ly,Lz = 1000,1000, 924.78 Mpc/h
  - Sky_area (determined by cartesian 1Gpc^2 perpendicular box-size at z_eff) = 54.1 x 54.1 = 2927 deg^2
  - T_obs = 1000hrs
  - Beam = (Dish diameter = 15m) - for freq-independent beam and noise
