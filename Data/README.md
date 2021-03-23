@@ -14,7 +14,8 @@ Investigating Gaussian Process Regression on 21cm foregrounds for low-z, single-
  - N_dishes = 64, Tsys = 25 K
 
 ## Data Folder currently contains:
-- `T_HI-MDSAGE_z_0.39.npy` (HI signal)
+- `data.h5` (master data file, contains all smoothed and unsmoothed data, including different combinations, e.g. HI signal + noise smoothed together) - see notebook `Create_datafile.ipynb` to see exactly how we generate this file using the data described below.
+ - `T_HI-MDSAGE_z_0.39.npy` (HI signal)
  - `dT_free_Stripe82_noBeam.npy` (free-free smooth foreground component)
  - `dT_psource_Stripe82_noBeam.npy` (point source smooth foreground component)
  - `dT_sync_Stripe82_noBeam.npy` (synchrotron smooth foreground component)
