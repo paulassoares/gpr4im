@@ -1,10 +1,7 @@
 import numpy as np
 import pandas as pd
 import GPy
-
-import sys
-sys.path.append('../')
-import load_datacube as load
+import obs_tools as obs
 
 
 '''
@@ -52,8 +49,8 @@ def GPRclean(Input, freqs, k_FG, k_21cm, num_restarts=10, NprePCA=0, noise_data=
     # converting [Nx,Ny,Nz] -> [Npix,Nz]
         # note: we mean center the data but not the inidividual noise cube, since we want
         # to extract the real noise variance in our data.
-    Input = load.LoSpixels(np.copy(Input), mean_center=True)
-    if noise_data is not None: noise_data = load.LoSpixels(noise_data, mean_center=False)
+    Input = obs.LoSpixels(np.copy(Input), mean_center=True)
+    if noise_data is not None: noise_data = obs.LoSpixels(noise_data, mean_center=False)
     
     # invert frequency axis
     if invert==True: 
@@ -173,8 +170,8 @@ def GPRfit(Input, freqs, kern, num_restarts=10, NprePCA=0, noise_data=None, zero
     # converting [Nx,Ny,Nz] -> [Npix,Nz]
         # note: we mean center the data but not the inidividual noise cube, since we want
         # to extract the real noise variance in our data.
-    Input = load.LoSpixels(np.copy(Input), mean_center=True)
-    if noise_data is not None: noise_data = load.LoSpixels(noise_data, mean_center=False)
+    Input = obs.LoSpixels(np.copy(Input), mean_center=True)
+    if noise_data is not None: noise_data = obs.LoSpixels(noise_data, mean_center=False)
     
     # invert frequency axis
     if invert==True: 
@@ -241,7 +238,7 @@ def PCAclean(Input, N_FG=4):
     
     # Collapse data cube to [Npix,Nz] structure:
     axes = np.shape(Input)
-    Input = load.LoSpixels(Input, mean_center=True)
+    Input = obs.LoSpixels(Input, mean_center=True)
     Nz,Npix = np.shape(Input)
     
     # Obtain frequency covariance matrix for input data
