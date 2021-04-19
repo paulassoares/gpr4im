@@ -1,5 +1,5 @@
-# GPRlowzIM
-Investigating Gaussian Process Regression on 21cm foregrounds for low-z, single-dish intensity mapping
+# Data
+Here we describe the data we use for our analysis, and where to access it.
 
 ## Assumed Survey Parameters:
 
@@ -14,15 +14,16 @@ Investigating Gaussian Process Regression on 21cm foregrounds for low-z, single-
  - N_dishes = 64, Tsys = 25 K
 
 ## Data Folder currently contains:
-- `data.h5` (master data file, contains all smoothed and unsmoothed data, including different combinations, e.g. HI signal + noise smoothed together) - see notebook `Create_datafile.ipynb` to see exactly how we generate this file using the data described below.
- - `T_HI-MDSAGE_z_0.39.npy` (HI signal)
- - `dT_free_Stripe82_noBeam.npy` (free-free smooth foreground component)
- - `dT_psource_Stripe82_noBeam.npy` (point source smooth foreground component)
- - `dT_sync_Stripe82_noBeam.npy` (synchrotron smooth foreground component)
- - `dT_pleak_Stripe82_noBeam.npy` (polarisation leakage foreground component)
- - `dT_noise.npy` (instrumental noise)
+- `data.pkl` (master data file, contains all smoothed and unsmoothed data, including different combinations, e.g. HI signal + noise smoothed together) - see notebook `Create data file.ipynb` to see exactly how we generate this file using the data described below.
+ - `T_HI-MDSAGE_z_0.39.npy` (HI signal, not smoothed by telescope beam)
+ - `dT_free_Stripe82_noBeam.npy` (free-free smooth foreground component, not smoothed by telescope beam)
+ - `dT_psource_Stripe82_noBeam.npy` (point source smooth foreground component, not smoothed by telescope beam)
+ - `dT_sync_Stripe82_noBeam.npy` (synchrotron smooth foreground component, not smoothed by telescope beam)
+ - `dT_pleak_Stripe82_noBeam.npy` (polarisation leakage foreground component, not smoothed by telescope beam)
+ - `dT_noise.npy` (instrumental noise, not smoothed by telescope beam)
+ - `dT_mock_smoothed.npy` (lognormal HI simulation, smoothed by telescope beam)
  
- [all data is not smoothed by telescope beam, temps are in mK]
+ [temps are in mK]
  
  See Section 3 of https://arxiv.org/pdf/2002.05626.pdf for similar process for producing the above data
 
