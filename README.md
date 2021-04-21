@@ -26,7 +26,8 @@ To install this package, follow the following instructions:
 
 If you make use of this code, please cite:
 
-```(bibtex for our paper)
+```
+bibtex for our paper
 ```
 
 This code is heavily based on the publicly available `ps_eor` code (https://gitlab.com/flomertens/ps_eor), so if you use it please also acknowledge:
