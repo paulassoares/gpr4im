@@ -11,5 +11,5 @@ setup(name='gpr4im',
       author='Paula S. Soares',
       author_email='p.s.soares@qmul.ac.uk',
       packages=['gpr4im'],
-      install_requires=['numpy','scipy','matplotlib'],
+      install_requires=['numpy','scipy','matplotlib','astropy','pandas','GPy','getdist','jupyter'],
 )

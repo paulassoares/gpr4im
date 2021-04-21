@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import GPy
-import obs_tools as obs
+from . import obs_tools as obs
 
 
 '''

@@ -4,22 +4,26 @@ This package uses Gaussian Process Regression (GPR) as a foreground removal tech
 
 ## Installation
 
-To install this package, follow the following instructions:
+To install this package, follow the following instructions on a terminal:
 
-(instructions ensue)
+```
+git clone https://github.com/psahds/gpr4im.git
+cd gpr4im
+pip install .
+```
+
+Make sure you do `pip install .` in the gpr4im folder, where the `setup.py` file is.
 
 ## Dependencies
 
 - `numpy`
 - `matplotlib`
 - `pandas`
-- `re`
 - `GPy` (see https://github.com/SheffieldML/GPy)
 - `scipy` (1.3.0 or later, due to GPy dependency)
 - `getdist` (only for making corner plots)
 - `astropy` (only for `Smoothing maps.ipynb`)
 - `pymultinest` (only for `Nested Sampling.ipynb` notebook)
-- `IPython` (optional, only for displaying certain images)
 - `jupyter` (for running the Jupyter Notebooks)
 
 ## Acknowledgment
