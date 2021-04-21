@@ -26,11 +26,13 @@ To install this package, follow the following instructions:
 
 If you make use of this code, please cite:
 
-(bibtex for our paper)
+```(bibtex for our paper)
+```
 
 This code is heavily based on the publicly available `ps_eor` code (https://gitlab.com/flomertens/ps_eor), so if you use it please also acknowledge:
 
-`@article{Mertens2018,
+```
+@article{Mertens2018,
    title={Statistical 21-cm Signal Separation via Gaussian Process Regression Analysis},
    ISSN={1365-2966},
    url={http://dx.doi.org/10.1093/mnras/sty1207},
@@ -40,4 +42,5 @@ This code is heavily based on the publicly available `ps_eor` code (https://gitl
    author={Mertens, F G and Ghosh, A and Koopmans, L V E},
    year={2018},
    month={May}
-}`
+}
+```
