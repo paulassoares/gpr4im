@@ -29,7 +29,7 @@ It will *not* install `pymultinest`, which is required for the `Nested Sampling.
 
 ## Quickstart
 
-For a quick introduction on how to run the code, please see `Running GPR.ipynb`. For a more thorough run through of how the code works, please see `Understanding GPR.ipynb`.
+For a quick introduction on how to run the code, please see `Running GPR.ipynb`. For a more thorough run through of how the code works, please see `Understanding GPR.ipynb`. The Jupyter Notebooks folder contains other introductory notebooks for how all the aspects of our code and data work, and are all user friendly. The Analysis folder contains the notebooks showing how we obtained the analysis results for our companion paper (these are less introductory, but useful for those trying to understand how our analysis was done).
 
 ## Acknowledgment
 
