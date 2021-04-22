@@ -1,5 +1,5 @@
 # Data
-Here we describe the data we use for our analysis, and where to access it.
+Here we describe the simulated MeerKAT-like single-dish 21cm intensity mapping data we use for our analysis, and where to access it.
 
 ## Assumed Survey Parameters:
 
@@ -48,7 +48,7 @@ Master data file, contains all smoothed and unsmoothed data, including different
 
 See Section 2 of https://arxiv.org/pdf/2010.02907v2.pdf and Section 3 of https://arxiv.org/pdf/2002.05626.pdf for details on how the above data are generated.
 
-> We acknowledge use of publickly available MultiDark simulations for generating our HI cosmological signal http://www.multidark.org/
+> We acknowledge use of publicly available MultiDark simulations for generating our HI cosmological signal http://www.multidark.org/
 
 >These maps were run with the Queen Mary’s Apocrita HPC facility, supported by QMUL Research-IT http://doi.org/10.5281/zenodo.438045 using Python 3.6.5.
 
