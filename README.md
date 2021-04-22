@@ -14,17 +14,22 @@ pip install .
 
 Make sure you do `pip install .` in the gpr4im folder, where the `setup.py` file is.
 
-## Dependencies
+Installing `gpr4im` will also automatically install:
 
 - `numpy`
 - `matplotlib`
 - `pandas`
 - `GPy` (see https://github.com/SheffieldML/GPy)
-- `scipy` (1.3.0 or later, due to GPy dependency)
-- `getdist` (only for making corner plots)
-- `astropy` (only for `Smoothing maps.ipynb`)
-- `pymultinest` (only for `Nested Sampling.ipynb` notebook)
-- `jupyter` (for running the Jupyter Notebooks)
+- `scipy`
+- `getdist`
+- `astropy`
+- `jupyter`
+
+It will not install `pymultinest`, which is required for the `Nested Sampling.ipynb` notebook. If you would like to run that notebook, please see http://johannesbuchner.github.io/PyMultiNest/install.html.
+
+## Quickstart
+
+For a quick introduction on how to run the code, please see `Running GPR.ipynb`. For a more thorough run through of how the code works, please see `Understanding GPR.ipynb`.
 
 ## Acknowledgment
 
@@ -34,7 +39,7 @@ If you make use of this code, please cite:
 bibtex for our paper
 ```
 
-This code is heavily based on the publicly available `ps_eor` code (https://gitlab.com/flomertens/ps_eor), so if you use it please also acknowledge:
+This code is heavily based on the publicly available `ps_eor` code (https://gitlab.com/flomertens/ps_eor), so if you use our code please also acknowledge:
 
 ```
 @article{Mertens2018,
