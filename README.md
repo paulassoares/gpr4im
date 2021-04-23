@@ -1,6 +1,6 @@
 # gpr4im
 
-This package uses Gaussian Process Regression (GPR) as a foreground removal technique in the context single-dish 21cm intensity mapping. This user-friendly code shows you how to do this in the context of MeerKAT-like simulations, but any intensity mapping data can be used. This is the accompaying code to the paper (paper link here), where we look at how GPR performs as a foreground removal technique in our simulations in comparison with Principal Component Analysis.
+This package uses Gaussian Process Regression (GPR) as a foreground removal technique in the context single-dish 21cm intensity mapping. This user-friendly code shows you how to do this in the context of MeerKAT-like simulations, but any intensity mapping data can be used. This is the accompaying code to the paper `(paper link here)`, where we look at how GPR performs as a foreground removal technique in our simulations in comparison with Principal Component Analysis.
 
 ## Installation
 
@@ -25,7 +25,7 @@ Installing `gpr4im` will also automatically install:
 - `astropy`
 - `jupyter`
 
-It will *not* install `pymultinest`, which is required for the `Nested Sampling.ipynb` notebook. If you would like to run that notebook, please see http://johannesbuchner.github.io/PyMultiNest/install.html for more details.
+It will *not* install `pymultinest`, which is required for the `Nested sampling.ipynb` notebook. If you would like to run that notebook, please see http://johannesbuchner.github.io/PyMultiNest/install.html for more details.
 
 ## Quickstart
 
