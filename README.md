@@ -29,7 +29,7 @@ It will *not* install `pymultinest`, which is required for the `Nested Sampling.
 
 ## Quickstart
 
-For a quick introduction on how to run the code, please see `Running GPR.ipynb`. For a more thorough run through of how the code works, please see `Understanding GPR.ipynb`. The Jupyter Notebooks folder contains other introductory notebooks for how all the aspects of our code and data work, and are all user friendly. These use the data set `example_data.pkl`, which is described in the Data folder README.
+For a quick introduction on how to run the code, please see `Running GPR.ipynb`. For a more thorough run through of how the code works, please see `Understanding GPR.ipynb`. The Jupyter Notebooks folder contains other introductory notebooks for how all the aspects of our code and data work, and are all user friendly. These use the data set `example_data.pkl`, which is described in the Data folder's README.
 
 An very quick example of how to run GPR foreground removal using our code is shown below, but please see the Jupyter notebooks for further explanation:
 
@@ -38,7 +38,7 @@ import pandas as pd
 import GPy
 from gpr4im import fg_tools as fg
 
-data = pd.read_pickle('../Data/example_data.pkl')
+data = pd.read_pickle('example_data.pkl')
 
 kern_fg = GPy.kern.RBF(1)
 kern_fg.variance.constrain_bounded(1000,100000000)
@@ -47,12 +47,12 @@ kern_21 = GPy.kern.Exponential(1)
 kern_21.variance.constrain_bounded(0.000001,0.5)
 kern_21.lengthscale.constrain_bounded(0.01,15)
 
-gpr_result = fg.GPRclean(data.beam.FGnopol_HI_noise, data.freqs, kern_fg, kern_21, NprePCA=0, 
-                         num_restarts=10, noise_data=None, heteroscedastic=False, zero_noise=True, 
-                         invert=False)
+gpr_result = fg.GPRclean(data.beam.FGnopol_HI_noise, data.freqs, kern_fg, kern_21, 
+                         NprePCA=0, num_restarts=10, noise_data=None, 
+                         heteroscedastic=False, zero_noise=True, invert=False)
 ```
 
-The Reproducible paper plots folder contains the notebooks showing how we obtained the analysis results for our companion paper (these are less introductory, but useful for those trying to understand how our analysis was done). The code here requires the `multinest_results.pkl` file, as well as the full data used in our analysis, `data.pkl`, which can be obtained from this link (but beware, it is 2.56 GB):
+The Reproducible paper plots folder contains the notebooks showing how we obtained the analysis results for our companion paper (these are less introductory, but useful for those trying to understand how our analysis was done). The code here requires the `multinest_results.pkl` file, as well as the full data used in our analysis, `data.pkl`, which can be obtained from this link (but beware, it is 2.84 GB):
 
 > https://www.dropbox.com/sh/9zftczeypu7xgt3/AABiiBw_0SBPrLgSHsjiISz8a?dl=0
 
