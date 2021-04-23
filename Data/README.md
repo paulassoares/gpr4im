@@ -3,6 +3,8 @@ Here we describe the simulated MeerKAT-like single-dish 21cm intensity mapping d
 
 ## Assumed Survey Parameters:
 
+The full data used in our paper analysis has the following specifications:
+
  - Redshift = 0.2 < z < 0.58
  - Effective Central Redshift (z_eff) = 0.39 [Multi-Dark cosmology sim will be a box evolved to this redshift]
  - Frequency Channels = (899 - 1184)MHz - 1MHz channel width (285 channels)
@@ -15,9 +17,25 @@ Here we describe the simulated MeerKAT-like single-dish 21cm intensity mapping d
 
 ## Data folder contains:
 
-### `data.pkl`
+### `example_data.pkl` [74.5 MB]
 
-Master data file, contains all smoothed and unsmoothed data, including different combinations, e.g. HI signal + noise smoothed together. This is in the form of a `pandas` Series, split into the following headers and sub-headers:
+An example data set to be used in our example Jupyter notebooks. This data file, which can be downloaded either directly from GitHub or from the data link, is a version of our main data cut in half. We do this in order to decrease the file size, and include this data in our example Jupyter notebooks, such that people may easily try out our code. It contains the following data:
+
+- `freqs`: frequency range of data, in MHz
+
+- `beam`: Smoothed data, split into: 
+  - `FGnopol_HI_noise`: All foregrounds (except `pleak`) + HI + noise
+  - `FGnopol`: All foregrounds (except `pleak`)
+  - `HI_noise`: HI + noise data
+  - `noise`: Noise data
+
+[all temperature units are in mK]
+
+### `data.pkl` [2.84 GB]
+
+Master file of the data used in the paper analysis, contains all smoothed and unsmoothed data, including different combinations, e.g. HI signal + noise smoothed together. This is in the form of a `pandas` Series, split into the following headers and sub-headers:
+
+- `freqs`: frequency range of data, in MHz
 
 - `nobeam`: Unsmoothed data, split into:
   - `foregrounds`: Our different foreground sources
@@ -52,7 +70,7 @@ See Section 2 of https://arxiv.org/pdf/2010.02907v2.pdf and Section 3 of https:/
 
 >These maps were run with the Queen Mary’s Apocrita HPC facility, supported by QMUL Research-IT http://doi.org/10.5281/zenodo.438045 using Python 3.6.5.
 
-### `multinest_results.pkl`
+### `multinest_results.pkl` [2.8 MB]
 
 Summary of results for our kernel models, obtained using `pymultinest`'s Nested Sampling routine. This is also in the form of a `pandas` series, and is split into each different case considered. Each case includes the median and 1sigma errors of the hyperparameters, obtained from their posterior distributions. They also include the log marginal likelihood (evidence) and its uncertainty. Finally, you may also find the posterior distribution samples and their associated weights for each hyperparameter in these files.
 
