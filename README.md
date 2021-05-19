@@ -1,10 +1,10 @@
 # gpr4im
 
-This package uses Gaussian Process Regression (GPR) as a foreground removal technique in the context single-dish 21cm intensity mapping. This user-friendly code shows you how to do this in the context of MeerKAT-like simulations, but any intensity mapping data can be used. This is the accompaying code to the paper `(paper link here)`, where we look at how GPR performs as a foreground removal technique in our simulations in comparison with Principal Component Analysis.
+This package uses Gaussian Process Regression (GPR) as a foreground removal technique in the context single-dish 21cm intensity mapping. This user-friendly code shows you how to do this in the context of MeerKAT-like simulations, but any intensity mapping data in real space can be used. This is the accompaying code to the paper `(paper link here)`, where we look at how GPR performs as a foreground removal technique in our simulations in comparison with Principal Component Analysis.
 
 ## Installation
 
-To install this package, follow the following instructions on a terminal:
+To install this package, follow these instructions on a terminal:
 
 ```
 git clone https://github.com/psahds/gpr4im.git
@@ -25,7 +25,7 @@ Installing `gpr4im` will also automatically install:
 - `astropy`
 - `jupyter`
 
-It will *not* install `pymultinest`, which is required for the `Nested sampling.ipynb` notebook. If you would like to run that notebook, please see http://johannesbuchner.github.io/PyMultiNest/install.html for more details.
+It will *not* install `pymultinest`, which is required for the `Nested sampling.ipynb` notebook. If you would like to run that notebook, please see http://johannesbuchner.github.io/PyMultiNest/install.html for details on installation.
 
 ## Quickstart
 
@@ -52,6 +52,8 @@ gpr_result = fg.GPRclean(dirty_map, data.freqs, kern_fg, kern_21,
 
 cleaned_map = gpr_result.res
 ```
+
+## Introductory notebooks
 
 For a quick introduction on how to run the code, please see `Running GPR.ipynb`. For a more thorough run through of how the code works, please see `Understanding GPR.ipynb`. The Jupyter Notebooks folder contains other introductory notebooks for how all the aspects of our code and data work, and are all user friendly. These use the data set `example_data.pkl`, which is described in the Data folder's README.
 

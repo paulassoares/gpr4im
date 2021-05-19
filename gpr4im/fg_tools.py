@@ -24,7 +24,7 @@ def GPRclean(Input, freqs, k_FG, k_21cm, num_restarts=10, NprePCA=0, noise_data=
     
     NUM_RESTARTS: how many times to optimise the GPR regression model.
         [NOTE: If you already know your best fitting kernels (i.e., you're inputting the already
-        optimized k_FG and k_21cm kernels), set num_restarts=0.]
+        optimized k_FG and k_21cm kernels), set num_restarts = 0]
         
     NprePCA: 0 if no pre-PCA is desired, otherwise this number is the N_FG number of components used
         in a pre-PCA clean of the data
@@ -37,7 +37,8 @@ def GPRclean(Input, freqs, k_FG, k_21cm, num_restarts=10, NprePCA=0, noise_data=
         you want to fit your noise with a separate kernel instead, otherwise you will fit to noise twice.
         
     HETEROSCEDASTIC: if True, runs Heteroscedastic regression model (variable noise)
-        (Note: you cannot have noise=False and heteroscedastic=True at the same time, for obvious reasons).
+        (Note: you cannot have zero_noise=False and heteroscedastic=True at the same time, set 
+        heteroscedastic=False instead in this case).
         
     INVERT: if True, inverts data in the frequency direction
     '''
@@ -145,7 +146,7 @@ def GPRfit(Input, freqs, kern, num_restarts=10, NprePCA=0, noise_data=None, zero
     
     NUM_RESTARTS: how many times to optimise the GPR regression model.
         [NOTE: If you already know your best fitting kernels (i.e., you're inputting the already
-        optimized k_FG and k_21cm kernels), set num_restarts=0.]
+        optimized k_FG and k_21cm kernels), set num_restarts = 0]
         
     NprePCA: 0 if no pre-PCA is desired, otherwise this number is the N_FG number of components used
         in a pre-PCA clean of the data
@@ -158,7 +159,8 @@ def GPRfit(Input, freqs, kern, num_restarts=10, NprePCA=0, noise_data=None, zero
         you want to fit your noise with a separate kernel instead, otherwise you will fit to noise twice.
         
     HETEROSCEDASTIC: if True, runs Heteroscedastic regression model (variable noise)
-        (Note: you cannot have noise=False and heteroscedastic=True at the same time, for obvious reasons).
+        (Note: you cannot have zero_noise=False and heteroscedastic=True at the same time, set 
+        heteroscedastic=False instead in this case).
         
     INVERT: if True, inverts data in the frequency direction
     '''

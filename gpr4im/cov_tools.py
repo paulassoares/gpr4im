@@ -3,7 +3,8 @@ import re
 
 
 '''
-This script contains code for getting samples from a particular kernel, and the corresponding equation. Taken from: https://gist.github.com/rikrd/05f5ca0c31adb9203823
+This script contains code for getting samples from a particular kernel, and the corresponding equation. 
+Taken from: https://gist.github.com/rikrd/05f5ca0c31adb9203823
 '''
 
 
@@ -11,13 +12,13 @@ def get_kernel_samples(kernel_name, X, n_samples, l=False, var=1.0):
     """
     Generate the multivariate random distribution of data with zero mean and covariance kernel
     specified by kernel_name, and obtain n samples.
-    Based on https://gist.github.com/rikrd/05f5ca0c31adb9203823
     
     INPUTS:
     kernel_name: name of covariance kernel as in dir(GPy.kern)
     X: x data points to calculate kernel over
     n_samples: number of samples to obtain from multivariate random distribution
-    l: lengthscale, always False if kernel doesn't have a lengthscale parameter
+    l: lengthscale, always False if kernel doesn't have a lengthscale hyperparameter
+    var: variance
     """
     import GPy
     # Get the kernel from GPy:
@@ -38,8 +39,7 @@ def get_kernel_samples(kernel_name, X, n_samples, l=False, var=1.0):
 
 def get_equation(kern):
     """
-    Retrieves the LaTeX format functional form of covariance kernel (kern). Taken from:
-    https://gist.github.com/rikrd/05f5ca0c31adb9203823
+    Retrieves the LaTeX format functional form of covariance kernel (kern).
     """
     match = re.search(r'(math::)(\r\n|\r|\n)*(?P<equation>.*)(\r\n|\r|\n)*', kern.__doc__)
     return '' if match is None else match.group('equation').strip()

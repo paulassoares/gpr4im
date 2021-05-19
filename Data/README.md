@@ -1,6 +1,10 @@
 # Data
 Here we describe the simulated MeerKAT-like single-dish 21cm intensity mapping data we use for our analysis, and where to access it.
 
+## Access data folder here:
+
+> https://www.dropbox.com/sh/9zftczeypu7xgt3/AABiiBw_0SBPrLgSHsjiISz8a?dl=0
+
 ## Assumed Survey Parameters:
 
 The full data used in our paper analysis has the following specifications:
@@ -19,7 +23,7 @@ The full data used in our paper analysis has the following specifications:
 
 ### `example_data.pkl` [74.5 MB]
 
-An example data set to be used in our example Jupyter notebooks. This data file, which can be downloaded either directly from GitHub or from the data link, is a version of our main data cut in half. We do this in order to decrease the file size, and include this data in our example Jupyter notebooks, such that people may easily try out our code. It contains the following data:
+An example data set to be used in our example Jupyter notebooks. This data file, which can be downloaded either directly from GitHub or from the data folder link, is a version of our main data cut in half. We do this in order to decrease the file size, and include this data in our example Jupyter notebooks, such that people may easily try out our code. This is in the form of a `pandas` Series, split into the following headers and sub-headers:
 
 - `freqs`: frequency range of data, in MHz
 
@@ -72,8 +76,4 @@ See Section 2 of https://arxiv.org/pdf/2010.02907v2.pdf and Section 3 of https:/
 
 ### `multinest_results.pkl` [2.8 MB]
 
-Summary of results for our kernel models, obtained using `pymultinest`'s Nested Sampling routine. This is also in the form of a `pandas` series, and is split into each different case considered. Each case includes the median and 1sigma errors of the hyperparameters, obtained from their posterior distributions. They also include the log marginal likelihood (evidence) and its uncertainty. Finally, you may also find the posterior distribution samples and their associated weights for each hyperparameter in these files.
-
-## Access data folder here:
-
-> https://www.dropbox.com/sh/9zftczeypu7xgt3/AABiiBw_0SBPrLgSHsjiISz8a?dl=0
+Summary of results for our optimised kernel models, obtained using `pymultinest`'s Nested Sampling routine. This is also in the form of a `pandas` series, and is split into each different case considered. Each case includes the median and 1sigma errors of the hyperparameters, obtained from their posterior distributions. They also include the log marginal likelihood (evidence) and its uncertainty. Finally, you may also find the posterior distribution samples and their associated weights for each hyperparameter in these files. See the `Nested sampling.ipynb` notebook for more details.
