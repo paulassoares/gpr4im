@@ -1,6 +1,6 @@
 # gpr4im
 
-This package uses Gaussian Process Regression (GPR) as a foreground removal technique in the context single-dish 21cm intensity mapping. This user-friendly code shows you how to do this in the context of MeerKAT-like simulations, but any intensity mapping data in real space can be used. This is the accompaying code to the paper `(paper link here)`, where we look at how GPR performs as a foreground removal technique in our simulations in comparison with Principal Component Analysis.
+This package uses Gaussian Process Regression (GPR) as a foreground removal technique in the context single-dish 21cm intensity mapping. This user-friendly code shows you how to do this in the context of MeerKAT-like simulations, but any intensity mapping data in real space can be used. This is the accompaying code to the paper `(https://arxiv.org/abs/2105.12665)`, where we look at how GPR performs as a foreground removal technique in our simulations in comparison with Principal Component Analysis.
 
 ## Installation
 
@@ -68,7 +68,14 @@ The `Nested sampling.ipynb` notebook also uses this data, and requires `pymultin
 If you make use of this code, please cite:
 
 ```
-bibtex for our paper
+@misc{soares2021gaussian,
+      title={Gaussian Process Regression for foreground removal in HI intensity mapping experiments}, 
+      author={Paula S. Soares and Catherine A. Watkinson and Steven Cunnington and Alkistis Pourtsidou},
+      year={2021},
+      eprint={2105.12665},
+      archivePrefix={arXiv},
+      primaryClass={astro-ph.CO}
+}
 ```
 
 This code is heavily based on the publicly available `ps_eor` code (https://gitlab.com/flomertens/ps_eor), so if you use our code please also acknowledge:
