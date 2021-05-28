@@ -7,7 +7,7 @@ This package uses Gaussian Process Regression (GPR) as a foreground removal tech
 To install this package, follow these instructions on a terminal:
 
 ```
-git clone https://github.com/psahds/gpr4im.git
+git clone https://github.com/paulassoares/gpr4im.git
 cd gpr4im
 pip install .
 ```
