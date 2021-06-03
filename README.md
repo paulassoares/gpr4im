@@ -1,3 +1,5 @@
+<img src="https://github.com/paulassoares/gpr4im/blob/main/Jupyter%20Notebooks/images/logo.png?raw=true" width=300>
+
 # gpr4im
 
 This package uses Gaussian Process Regression (GPR) as a foreground removal technique in the context single-dish 21cm intensity mapping. This user-friendly code shows you how to do this in the context of MeerKAT-like simulations, but any intensity mapping data in real space can be used. This is the accompaying code to the paper `(https://arxiv.org/abs/2105.12665)`, where we look at how GPR performs as a foreground removal technique in our simulations in comparison with Principal Component Analysis.
