@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/stevecunnington/pyIntensity/blob/main/Logo.png?raw=true" width=300 />
+  <img src="https://github.com/stevecunnington/pyIntensity/blob/main/Logo.png?raw=true" width=700 />
 </p>
 
 # gpr4im
