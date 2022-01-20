@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/paulassoares/gpr4im/blob/main/Jupyter%20Notebooks/images/logo.png?raw=true" width=300 />
+  <img src="https://github.com/stevecunnington/pyIntensity/blob/main/Logo.png?raw=true" width=300 />
 </p>
 
 # gpr4im
