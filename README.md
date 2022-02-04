@@ -78,13 +78,19 @@ The `Nested sampling.ipynb` notebook also uses this data, and requires `pymultin
 If you make use of this code, please cite:
 
 ```
-@misc{soares2021gaussian,
-      title={Gaussian Process Regression for foreground removal in HI intensity mapping experiments}, 
-      author={Paula S. Soares and Catherine A. Watkinson and Steven Cunnington and Alkistis Pourtsidou},
-      year={2021},
-      eprint={2105.12665},
-      archivePrefix={arXiv},
-      primaryClass={astro-ph.CO}
+@article{2021,
+   title={Gaussian Process Regression for foreground removal in H i Intensity Mapping experiments},
+   volume={510},
+   ISSN={1365-2966},
+   url={http://dx.doi.org/10.1093/mnras/stab2594},
+   DOI={10.1093/mnras/stab2594},
+   number={4},
+   journal={Monthly Notices of the Royal Astronomical Society},
+   publisher={Oxford University Press (OUP)},
+   author={Soares, Paula S and Watkinson, Catherine A and Cunnington, Steven and Pourtsidou, Alkistis},
+   year={2021},
+   month={Sep},
+   pages={5872–5890} 
 }
 ```
 
